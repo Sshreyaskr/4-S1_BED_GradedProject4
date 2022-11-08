@@ -61,7 +61,6 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .authenticated()
                 .and()
                 .formLogin()
-                .successHandler(myAuthenticationSuccessHandler())
                 .and()
                 .httpBasic()
                .and()
@@ -76,19 +75,5 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
-	@Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-            .build();
-    }
-	
-	 @Bean
-	    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
-	        return new MySimpleUrlAuthenticationSuccessHandler();
-	    }
-	
-	
-	
 
 }
